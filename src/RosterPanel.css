@@ -1,0 +1,1131 @@
+.roster-panel {
+  --roster-bg: #050608;
+  --roster-surface: #0b0d10;
+  --roster-surface-raised: #12151a;
+  --roster-surface-deep: #030405;
+
+  --roster-border:
+    rgba(255, 255, 255, 0.1);
+
+  --roster-border-strong:
+    rgba(255, 255, 255, 0.15);
+
+  --roster-text: #f4f6f8;
+
+  --roster-text-soft:
+    rgba(255, 255, 255, 0.7);
+
+  --roster-text-muted:
+    rgba(255, 255, 255, 0.43);
+
+  --roster-digital: #7bea89;
+  --roster-empty: #d4c174;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  /*
+   * Allow the panel to use the available screen height,
+   * but scroll instead of clipping cards.
+   */
+  height: 100%;
+  overflow: auto;
+
+  padding-bottom: 8px;
+
+  color: var(--roster-text);
+
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.roster-panel__grid {
+  display: grid;
+
+  /*
+   * Automatically reduce the number of columns
+   * as the screen gets narrower.
+   */
+   grid-template-columns:
+   repeat(
+     5,
+     minmax(220px, 1fr)
+   );
+
+ grid-template-rows:
+   repeat(
+     2,
+     minmax(0, 1fr)
+   );
+
+ gap: 7px;
+
+ width: 100%;
+ height: 94%;
+
+ min-width: 1180px;
+ min-height: 0;
+}
+
+ 
+
+.roster-panel__empty {
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  color:
+    var(--roster-text-muted);
+
+  background:
+    linear-gradient(
+      180deg,
+      #111318,
+      #050608
+    );
+
+  border:
+    1px solid
+    var(--roster-border);
+}
+
+/* -------------------------------------------------- */
+/* Manager card                                       */
+/* -------------------------------------------------- */
+
+.roster-card {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--roster-border-strong);
+
+  border-radius: 6px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.014) 0,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      180deg,
+      #15181d 0%,
+      #090b0e 48%,
+      #030405 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0
+      rgba(0, 0, 0, 0.95),
+    0 5px 14px
+      rgba(0, 0, 0, 0.34);
+}
+
+.roster-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.035),
+      transparent 24%,
+      transparent 76%,
+      rgba(255, 255, 255, 0.015)
+    );
+
+  pointer-events: none;
+}
+
+.roster-card::after {
+  content: "";
+
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  right: 3px;
+  z-index: 10;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+/* -------------------------------------------------- */
+/* Manager header                                     */
+/* -------------------------------------------------- */
+
+.roster-card__header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  flex: 0 0 auto;
+
+  padding:
+    7px
+    8px
+    6px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(29, 32, 37, 0.98),
+      rgba(10, 12, 15, 0.98)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0
+      rgba(0, 0, 0, 0.75);
+}
+
+.roster-card__header::after {
+  content: "";
+
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 2px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(123, 234, 137, 0.28),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+.roster-card__manager-block {
+  min-width: 0;
+}
+
+.roster-card__eyebrow {
+  margin:
+    0
+    0
+    2px;
+
+  color:
+    var(--roster-text-muted);
+
+  font-size: 7px;
+  font-weight: 800;
+  line-height: 1;
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.roster-card__manager {
+  overflow: hidden;
+
+  margin: 0;
+
+  color:
+    var(--roster-text);
+
+  font-family:
+    "Roboto Condensed",
+    "Arial Narrow",
+    Inter,
+    sans-serif;
+
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: 0.025em;
+  text-overflow: ellipsis;
+  text-shadow:
+    0 1px 3px
+      rgba(0, 0, 0, 0.8);
+
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* Completion display                                 */
+/* -------------------------------------------------- */
+
+.roster-card__completion {
+  position: relative;
+
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-width: 44px;
+
+  padding:
+    5px
+    6px
+    4px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.09);
+
+  border-radius: 3px;
+
+  color:
+    var(--roster-text-muted);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123, 234, 137, 0.05)
+        0 0.7px,
+      transparent 0.9px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.62)
+    );
+
+  background-size:
+    4px 4px,
+    100% 100%;
+
+  box-shadow:
+    inset 0 2px 5px
+      rgba(0, 0, 0, 0.78),
+    inset 0 -1px 0
+      rgba(255, 255, 255, 0.035);
+
+  font-size: 9px;
+  line-height: 1;
+}
+
+.roster-card__completion strong {
+  color:
+    var(--roster-digital);
+
+  font-family:
+    "Share Tech Mono",
+    "Arial Narrow",
+    monospace;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+
+  text-shadow:
+    0 0 5px
+      rgba(123, 234, 137, 0.3);
+}
+
+.roster-card__completion span {
+  margin-left: 1px;
+
+  color:
+    rgba(255, 255, 255, 0.4);
+
+  font-size: 8px;
+}
+
+/* -------------------------------------------------- */
+/* Progress indicator                                 */
+/* -------------------------------------------------- */
+
+.roster-card__progress {
+  flex: 0 0 2px;
+
+  width: 100%;
+  height: 2px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  box-shadow:
+    inset 0 1px 1px
+      rgba(0, 0, 0, 0.7);
+}
+
+.roster-card__progress span {
+  display: block;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(104, 184, 157, 0.6),
+      rgba(123, 234, 137, 0.85)
+    );
+
+  box-shadow:
+    0 0 5px
+      rgba(123, 234, 137, 0.18);
+
+  transition:
+    width 160ms ease;
+}
+
+/* -------------------------------------------------- */
+/* Metrics                                            */
+/* -------------------------------------------------- */
+
+.roster-card__metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  flex: 0 0 auto;
+
+  padding: 3px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(17, 20, 24, 0.98),
+      rgba(5, 6, 8, 0.98)
+    );
+
+  box-shadow:
+    inset 0 -1px 0
+      rgba(0, 0, 0, 0.72);
+}
+
+.roster-metric {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+
+  min-width: 0;
+
+  padding:
+    4px
+    2px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.055);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123, 234, 137, 0.035)
+        0 0.65px,
+      transparent 0.85px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.43)
+    );
+
+  background-size:
+    4px 4px,
+    100% 100%;
+
+  box-shadow:
+    inset 0 2px 4px
+      rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0
+      rgba(255, 255, 255, 0.025);
+
+  text-align: center;
+}
+
+.roster-metric +
+.roster-metric {
+  margin-left: 3px;
+}
+
+.roster-metric span {
+  color:
+    var(--roster-text-muted);
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.roster-metric strong {
+  overflow: hidden;
+
+  max-width: 100%;
+
+  color:
+    var(--roster-digital);
+
+  font-family:
+    "Share Tech Mono",
+    "Arial Narrow",
+    monospace;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  text-shadow:
+    0 0 5px
+      rgba(123, 234, 137, 0.23);
+
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* Slot columns                                       */
+/* -------------------------------------------------- */
+
+.roster-card__slot-columns {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  flex: 1 1 auto;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  background:
+    rgba(3, 4, 5, 0.35);
+}
+
+.roster-card__slot-column {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+}
+
+.roster-card__slot-column +
+.roster-card__slot-column {
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    inset 1px 0 0
+      rgba(0, 0, 0, 0.75);
+}
+
+/* -------------------------------------------------- */
+/* Shared roster slot                                 */
+/* -------------------------------------------------- */
+
+.roster-slot {
+  --slot-rgb:
+    137, 145, 156;
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    35px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 5px;
+
+  flex: 1 1 0;
+
+  min-height: 22px;
+
+  padding:
+    2px
+    5px
+    2px
+    4px;
+
+  overflow: hidden;
+
+  border-left:
+    3px solid
+    transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        var(--slot-rgb),
+        0.085
+      ),
+      rgba(
+        var(--slot-rgb),
+        0.025
+      ) 48%,
+      transparent 100%
+    );
+}
+
+.roster-slot::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  opacity: 0.62;
+
+  pointer-events: none;
+}
+
+.roster-slot +
+.roster-slot {
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.055);
+}
+
+.roster-slot__label,
+.roster-slot__name,
+.roster-slot__price {
+  position: relative;
+  z-index: 1;
+}
+
+.roster-slot__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 18px;
+
+  padding:
+    0
+    3px;
+
+  border:
+    1px solid
+    rgba(
+      var(--slot-rgb),
+      0.42
+    );
+
+  border-radius: 3px;
+
+  color:
+    rgb(
+      var(--slot-rgb)
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        var(--slot-rgb),
+        0.17
+      ),
+      rgba(
+        var(--slot-rgb),
+        0.07
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.075),
+    0 0 5px
+      rgba(
+        var(--slot-rgb),
+        0.08
+      );
+
+  font-family:
+    "Roboto Condensed",
+    "Arial Narrow",
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: 0.02em;
+}
+
+.roster-slot__name {
+  overflow: hidden;
+
+  color:
+    var(--roster-text);
+
+  font-family:
+    "Roboto Condensed",
+    "Arial Narrow",
+    Inter,
+    sans-serif;
+
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
+
+  letter-spacing: 0.015em;
+  text-overflow: ellipsis;
+  text-shadow:
+    0 1px 3px
+      rgba(0, 0, 0, 0.8);
+
+  white-space: nowrap;
+}
+
+.roster-slot__price {
+  color:
+    var(--roster-digital);
+
+  font-family:
+    "Share Tech Mono",
+    "Arial Narrow",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 0 5px
+      rgba(123, 234, 137, 0.23);
+
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* Muted position palette                             */
+/* -------------------------------------------------- */
+
+.roster-slot--filled {
+  border-left-color:
+    rgba(
+      var(--slot-rgb),
+      0.76
+    );
+
+  box-shadow:
+    inset 3px 0 7px
+      rgba(
+        var(--slot-rgb),
+        0.045
+      );
+}
+
+/* Muted coral red. */
+.roster-slot--qb {
+  --slot-rgb:
+    196, 105, 108;
+}
+
+/* Muted sage green. */
+.roster-slot--rb {
+  --slot-rgb:
+    101, 165, 126;
+}
+
+/* Muted slate blue. */
+.roster-slot--wr {
+  --slot-rgb:
+    100, 139, 192;
+}
+
+/* Muted bronze. */
+.roster-slot--te {
+  --slot-rgb:
+    181, 143, 91;
+}
+
+/* Muted lavender. */
+.roster-slot--abn {
+  --slot-rgb:
+    147, 116, 181;
+}
+
+/* Muted cyan. */
+.roster-slot--sbn {
+  --slot-rgb:
+    91, 164, 172;
+}
+
+/* Muted gold. */
+.roster-slot--k {
+  --slot-rgb:
+  199, 89, 10;
+}
+
+/* Muted steel gray. */
+.roster-slot--def {
+  --slot-rgb:
+  227, 229, 255;
+}
+
+/* -------------------------------------------------- */
+/* Empty roster slots                                 */
+/* -------------------------------------------------- */
+
+.roster-slot--empty {
+  --slot-rgb:
+  91, 98, 105;
+
+  border-left-color:
+    rgba(
+      var(--slot-rgb),
+      0.82
+    );
+
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 5px,
+      rgba(0, 0, 0, 0.08) 5px,
+      rgba(0, 0, 0, 0.08) 10px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(
+        var(--slot-rgb),
+        0.08
+      ),
+      rgba(
+        var(--slot-rgb),
+        0.02
+      ) 58%,
+      rgba(3, 4, 5, 0.96)
+    );
+
+  box-shadow:
+    inset 0 2px 5px
+      rgba(0, 0, 0, 0.72),
+    inset 3px 0 8px
+      rgba(
+        var(--slot-rgb),
+        0.05
+      );
+}
+
+.roster-slot--empty::before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 7px;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      var(--slot-rgb),
+      0.72
+    );
+
+  box-shadow:
+    0 0 4px
+      rgba(
+        var(--slot-rgb),
+        0.2
+      );
+
+  transform:
+    translateY(-50%);
+
+  opacity: 0.8;
+}
+
+.roster-slot--empty
+.roster-slot__label {
+  border-color:
+    rgba(
+      var(--slot-rgb),
+      0.42
+    );
+
+  color:
+    rgba(
+      var(--slot-rgb),
+      0.95
+    );
+
+  background:
+    rgba(
+      var(--slot-rgb),
+      0.09
+    );
+}
+
+.roster-slot--empty
+.roster-slot__name {
+  color:
+    rgba(86, 88, 90, 0.78);
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.roster-slot__price--empty {
+  padding-right: 8px;
+
+  color:
+    rgba(
+      160,
+      168,
+      178,
+      0.5
+    );
+
+  text-shadow: none;
+}
+
+/* -------------------------------------------------- */
+/* Footer                                             */
+/* -------------------------------------------------- */
+
+.roster-card__footer {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap: 5px;
+
+  flex: 0 0 auto;
+
+  min-height: 20px;
+
+  padding:
+    3px
+    7px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.09);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123, 234, 137, 0.025)
+        0 0.65px,
+      transparent 0.85px
+    ),
+    linear-gradient(
+      180deg,
+      #101216,
+      #040506
+    );
+
+  background-size:
+    4px 4px,
+    100% 100%;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.055),
+    inset 0 2px 5px
+      rgba(0, 0, 0, 0.42);
+}
+
+.roster-card__footer > span:first-child {
+  color:
+    var(--roster-text-muted);
+
+  font-size: 7px;
+  font-weight: 800;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.roster-card__footer strong {
+  color:
+    var(--roster-digital);
+
+  font-family:
+    "Share Tech Mono",
+    "Arial Narrow",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+
+  text-shadow:
+    0 0 5px
+      rgba(123, 234, 137, 0.22);
+}
+
+.roster-card__tier {
+  overflow: hidden;
+
+  color:
+    var(--roster-text-soft);
+
+  font-size: 7px;
+  font-weight: 800;
+  line-height: 1;
+
+  letter-spacing: 0.1em;
+  text-align: right;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- */
+/* Responsive behavior                                */
+/* -------------------------------------------------- */
+
+@media (max-width: 1300px) {
+  .roster-panel {
+    overflow-x: auto;
+  }
+
+  .roster-panel__grid {
+    grid-template-columns:
+      repeat(
+        5,
+        minmax(215px, 1fr)
+      );
+  }
+}
+
+@media (max-width: 900px) {
+  .roster-panel {
+    overflow: auto;
+  }
+
+  .roster-panel__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(280px, 1fr)
+      );
+
+    grid-template-rows: auto;
+
+    width: auto;
+    height: auto;
+
+    min-width: 580px;
+  }
+
+  .roster-card {
+    min-height: 330px;
+  }
+}
+
+@media (max-width: 620px) {
+  .roster-panel__grid {
+    grid-template-columns:
+      minmax(290px, 1fr);
+
+    min-width: 290px;
+  }
+}
+
+/* -------------------------------------------------- */
+/* Accessibility                                     */
+/* -------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .roster-card__progress span {
+    transition: none;
+  }
+}

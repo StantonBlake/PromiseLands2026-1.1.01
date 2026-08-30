@@ -1,0 +1,305 @@
+.specular-button {
+  --sb-height: 30px;
+  --sb-padding-x: 0.75rem;
+  --sb-font-size: 0.75rem;
+  --sb-radius: 8px;
+
+  --sb-background: #171717;
+  --sb-background-hover: #202020;
+  --sb-text: #f5f5f5;
+
+  --sb-border: rgba(255, 255, 255, 0.16);
+  --sb-border-hover: rgba(255, 255, 255, 0.32);
+
+  --sb-highlight: rgba(255, 255, 255, 0.8);
+  --sb-highlight-soft: rgba(255, 255, 255, 0.18);
+
+  --sb-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.06) inset,
+    0 -1px 1px rgba(0, 0, 0, 0.4) inset,
+    0 4px 10px rgba(0, 0, 0, 0.16);
+
+  --sb-pointer-x: 50%;
+  --sb-pointer-y: 50%;
+
+  position: relative;
+  isolation: isolate;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  height: var(--sb-height);
+  padding: 0 var(--sb-padding-x);
+
+  overflow: hidden;
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius);
+
+  background: var(--sb-background);
+  color: var(--sb-text);
+  box-shadow: var(--sb-shadow);
+
+  font: inherit;
+  font-size: var(--sb-font-size);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transform: translateZ(0);
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 100ms ease,
+    opacity 150ms ease;
+}
+
+/*
+ * Main glossy surface.
+ */
+.specular-button__surface {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/*
+ * Pointer-following glow.
+ */
+.specular-button__surface::before {
+  position: absolute;
+  inset: -1px;
+  content: "";
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      90px circle at var(--sb-pointer-x) var(--sb-pointer-y),
+      var(--sb-highlight-soft),
+      transparent 65%
+    );
+
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+/*
+ * Moving edge shine.
+ */
+.specular-button__surface::after {
+  position: absolute;
+  top: -80%;
+  bottom: -80%;
+  left: -60%;
+
+  width: 38%;
+  content: "";
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--sb-highlight),
+    transparent
+  );
+
+  filter: blur(5px);
+  opacity: 0;
+  transform: rotate(20deg) translateX(-200%);
+  pointer-events: none;
+}
+
+.specular-button:hover {
+  background: var(--sb-background-hover);
+  border-color: var(--sb-border-hover);
+}
+
+.specular-button:hover .specular-button__surface::before,
+.specular-button:focus-visible .specular-button__surface::before {
+  opacity: 1;
+}
+
+.specular-button:hover .specular-button__surface::after,
+.specular-button:focus-visible .specular-button__surface::after {
+  opacity: 0.5;
+  animation: specular-button-shine 900ms ease forwards;
+}
+
+.specular-button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 4px rgba(0, 0, 0, 0.14);
+}
+
+.specular-button:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.9);
+  outline-offset: 2px;
+}
+
+.specular-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+}
+
+.specular-button__content {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.specular-button__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sizes */
+
+.specular-button--xs {
+  --sb-height: 24px;
+  --sb-padding-x: 0.55rem;
+  --sb-font-size: 0.65rem;
+  --sb-radius: 6px;
+}
+
+.specular-button--sm {
+  --sb-height: 28px;
+  --sb-padding-x: 0.7rem;
+  --sb-font-size: 0.72rem;
+  --sb-radius: 7px;
+}
+
+.specular-button--md {
+  --sb-height: 34px;
+  --sb-padding-x: 0.9rem;
+  --sb-font-size: 0.8rem;
+  --sb-radius: 9px;
+}
+
+.specular-button--lg {
+  --sb-height: 40px;
+  --sb-padding-x: 1.1rem;
+  --sb-font-size: 0.9rem;
+  --sb-radius: 11px;
+}
+
+/* Variants */
+
+.specular-button--neutral {
+  --sb-background: #171717;
+  --sb-background-hover: #222222;
+  --sb-text: #f5f5f5;
+  --sb-border: rgba(255, 255, 255, 0.16);
+  --sb-border-hover: rgba(255, 255, 255, 0.3);
+  --sb-highlight: rgba(255, 255, 255, 0.85);
+  --sb-highlight-soft: rgba(255, 255, 255, 0.16);
+}
+
+.specular-button--primary {
+  --sb-background: #1d4ed8;
+  --sb-background-hover: #2563eb;
+  --sb-text: #ffffff;
+  --sb-border: rgba(191, 219, 254, 0.28);
+  --sb-border-hover: rgba(219, 234, 254, 0.55);
+  --sb-highlight: rgba(255, 255, 255, 0.95);
+  --sb-highlight-soft: rgba(147, 197, 253, 0.32);
+  --sb-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.14) inset,
+    0 -1px 1px rgba(30, 64, 175, 0.5) inset,
+    0 4px 12px rgba(37, 99, 235, 0.24);
+}
+
+.specular-button--success {
+  --sb-background: #15803d;
+  --sb-background-hover: #16a34a;
+  --sb-text: #ffffff;
+  --sb-border: rgba(187, 247, 208, 0.28);
+  --sb-border-hover: rgba(220, 252, 231, 0.55);
+  --sb-highlight-soft: rgba(134, 239, 172, 0.28);
+}
+
+.specular-button--danger {
+  --sb-background: #b91c1c;
+  --sb-background-hover: #dc2626;
+  --sb-text: #ffffff;
+  --sb-border: rgba(254, 202, 202, 0.3);
+  --sb-border-hover: rgba(254, 226, 226, 0.58);
+  --sb-highlight-soft: rgba(252, 165, 165, 0.3);
+}
+
+.specular-button--ghost {
+  --sb-background: rgba(255, 255, 255, 0.04);
+  --sb-background-hover: rgba(255, 255, 255, 0.08);
+  --sb-text: inherit;
+  --sb-border: rgba(128, 128, 128, 0.22);
+  --sb-border-hover: rgba(128, 128, 128, 0.4);
+  --sb-highlight: rgba(255, 255, 255, 0.65);
+  --sb-highlight-soft: rgba(255, 255, 255, 0.12);
+  --sb-shadow: none;
+}
+
+.specular-button--full-width {
+  width: 100%;
+}
+
+/* Loading */
+
+.specular-button__spinner {
+  width: 0.85em;
+  height: 0.85em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: specular-button-spin 650ms linear infinite;
+}
+
+@keyframes specular-button-shine {
+  from {
+    transform: rotate(20deg) translateX(-220%);
+  }
+
+  to {
+    transform: rotate(20deg) translateX(520%);
+  }
+}
+
+@keyframes specular-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .specular-button,
+  .specular-button__surface::before,
+  .specular-button__surface::after {
+    transition: none;
+  }
+
+  .specular-button:hover .specular-button__surface::after,
+  .specular-button:focus-visible .specular-button__surface::after {
+    animation: none;
+    opacity: 0.2;
+  }
+
+  .specular-button__spinner {
+    animation-duration: 1.2s;
+  }
+}

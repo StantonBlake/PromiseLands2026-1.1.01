@@ -1,0 +1,346 @@
+.reactive-button {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #ffae00,
+    #7e03aa,
+    #00fffb
+  );
+  --button-border-width: 0.125em;
+  --button-curve-size: 0.5em;
+  --button-background: #080312;
+  --button-text-color: #afffff;
+  --button-hover-color: #ffffff;
+  --button-shadow: 10px 10px 20px rgb(0 0 0 / 60%);
+
+  position: relative;
+  isolation: isolate;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  min-width: max-content;
+  padding: 0.5em 1.5em;
+
+  color: var(--button-text-color);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  appearance: none;
+  background: transparent;
+  border: 0;
+  box-shadow: var(--button-shadow);
+  cursor: pointer;
+
+  clip-path: polygon(
+    0% var(--button-curve-size),
+    var(--button-curve-size) 0,
+    100% 0,
+    100% calc(100% - var(--button-curve-size)),
+    calc(100% - var(--button-curve-size)) 100%,
+    0 100%
+  );
+
+  transition:
+    color 250ms ease,
+    opacity 250ms ease,
+    transform 250ms ease;
+}
+
+.reactive-button::before,
+.reactive-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.reactive-button::before {
+  z-index: -2;
+
+  background: var(--button-border-color);
+  background-size: 300% 300%;
+
+  animation: reactive-button-gradient 5s ease infinite;
+}
+
+.reactive-button::after {
+  z-index: -1;
+
+  background: var(--button-background);
+
+  clip-path: polygon(
+    var(--button-border-width)
+      calc(
+        var(--button-curve-size) +
+        var(--button-border-width) * 0.5
+      ),
+    calc(
+        var(--button-curve-size) +
+        var(--button-border-width) * 0.5
+      )
+      var(--button-border-width),
+    calc(100% - var(--button-border-width))
+      var(--button-border-width),
+    calc(100% - var(--button-border-width))
+      calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      ),
+    calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      )
+      calc(100% - var(--button-border-width)),
+    var(--button-border-width)
+      calc(100% - var(--button-border-width))
+  );
+
+  transition: clip-path 500ms ease;
+}
+
+.reactive-button:hover:not(:disabled):not([aria-disabled="true"]),
+.reactive-button:focus-visible:not(:disabled):not(
+    [aria-disabled="true"]
+  ) {
+  color: var(--button-hover-color);
+  transform: translateY(-1px);
+}
+
+.reactive-button:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  )::after,
+.reactive-button:focus-visible:not(:disabled):not(
+    [aria-disabled="true"]
+  )::after {
+  clip-path: polygon(
+    calc(100% - var(--button-border-width))
+      calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      ),
+    calc(100% - var(--button-border-width))
+      var(--button-border-width),
+    calc(100% - var(--button-border-width))
+      var(--button-border-width),
+    calc(100% - var(--button-border-width))
+      calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      ),
+    calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      )
+      calc(100% - var(--button-border-width)),
+    calc(
+        100% -
+        (
+          var(--button-curve-size) +
+          var(--button-border-width) * 0.5
+        )
+      )
+      calc(100% - var(--button-border-width))
+  );
+
+  transition-duration: 200ms;
+}
+
+.reactive-button:focus-visible {
+  outline: 3px solid rgb(175 255 255 / 45%);
+  outline-offset: 4px;
+}
+
+.reactive-button:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ) {
+  transform: translateY(1px);
+}
+
+.reactive-button:disabled,
+.reactive-button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Sizes */
+
+.reactive-button--small {
+  padding: 0.45em 1.1em;
+  font-size: 0.875rem;
+}
+
+.reactive-button--medium {
+  padding: 0.5em 1.5em;
+  font-size: 1.0625rem;
+}
+
+.reactive-button--large {
+  padding: 0.7em 1.8em;
+  font-size: 1.2rem;
+}
+
+/* Color variants */
+
+.reactive-button--aurora {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #ffae00,
+    #7e03aa,
+    #00fffb
+  );
+  --button-background: #080312;
+  --button-text-color: #afffff;
+}
+
+.reactive-button--ocean {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #00c6ff,
+    #0072ff,
+    #00ffcc
+  );
+  --button-background: #03121f;
+  --button-text-color: #c9f8ff;
+}
+
+.reactive-button--sunset {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #ff512f,
+    #f09819,
+    #ff00a8
+  );
+  --button-background: #190608;
+  --button-text-color: #fff1dc;
+}
+
+.reactive-button--exit {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #cf2300,
+    #610a0a,
+    #cd3b3b
+  );
+  --button-background: #190608;
+  --button-text-color: #fff1dc;
+}
+
+.reactive-button--success {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #00f260,
+    #0575e6,
+    #7fff00
+  );
+  --button-background: #04140c;
+  --button-text-color: #d9ffe8;
+}
+.reactive-button--accept {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #17b90c,
+    #19491a,
+    #52d149
+  );
+  --button-background: #04140c;
+  --button-text-color: #d9ffe8;
+}
+
+.reactive-button--danger {
+  --button-border-color: linear-gradient(
+    -45deg,
+    #ff416c,
+    #ff4b2b,
+    #b100ff
+  );
+  --button-background: #180307;
+  --button-text-color: #ffe0e7;
+}
+
+.reactive-button--full-width {
+  width: 100%;
+}
+
+/* Button content */
+
+.reactive-button__label,
+.reactive-button__icon,
+.reactive-button__spinner {
+  position: relative;
+  z-index: 1;
+}
+
+.reactive-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactive-button__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.reactive-button__spinner {
+  width: 1em;
+  height: 1em;
+
+  border: 0.125em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+
+  animation: reactive-button-spin 700ms linear infinite;
+}
+
+@keyframes reactive-button-gradient {
+  0% {
+    background-position: 31% 0%;
+  }
+
+  50% {
+    background-position: 70% 100%;
+  }
+
+  100% {
+    background-position: 31% 0%;
+  }
+}
+
+@keyframes reactive-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reactive-button,
+  .reactive-button::before,
+  .reactive-button::after,
+  .reactive-button__spinner {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+}

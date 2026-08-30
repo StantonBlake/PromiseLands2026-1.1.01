@@ -1,0 +1,314 @@
+.expandable-menu {
+  --menu-background: #080c14;
+  --menu-text: #1f2937;
+  --menu-hover-background: #eeeeee;
+  --menu-active-background: #080c14;
+  --menu-active-text: #111827;
+  --menu-border: transparent;
+  --menu-shadow: 0 10px 25px rgba(0, 0, 0, 0.075);
+
+  --menu-padding: 0.5rem;
+  --menu-radius: 15px;
+
+  --item-collapsed-width: 70px;
+  --item-expanded-width: 130px;
+  --item-height: 50px;
+  --item-radius: 8px;
+
+  --icon-size: 28px;
+  --icon-left: 18px;
+  --animation-speed: 0.2s;
+
+  display: flex;
+  justify-content: center;
+  gap: 0.0625rem;
+  width: fit-content;
+  padding: var(--menu-padding);
+  position: relative;
+
+  color: var(--menu-text);
+  background-color: var(--menu-background);
+  border: 1px solid var(--menu-border);
+  border-radius: var(--menu-radius);
+  box-shadow: var(--menu-shadow);
+}
+
+/* Orientations */
+
+.expandable-menu--horizontal {
+  flex-direction: row;
+}
+
+.expandable-menu--vertical {
+  flex-direction: column;
+}
+
+.expandable-menu__link {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--item-collapsed-width);
+  height: var(--item-height);
+
+  flex-shrink: 0;
+  overflow: hidden;
+
+  /*
+   * Reset native button/link appearance.
+   */
+  border: 0;
+  outline: none;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+
+  padding: 0;
+  margin: 0;
+
+  font: inherit;
+
+  border-radius: var(--item-radius);
+
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transform-origin: center left;
+
+  transition:
+    width var(--animation-speed) ease-in,
+    color var(--animation-speed) ease-in;
+}
+
+.expandable-menu__link::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  display: block;
+  content: "";
+
+  border-radius: inherit;
+  background-color: var(--menu-hover-background);
+
+  transform: translateX(100%);
+  transform-origin: center right;
+  transition: transform var(--animation-speed) ease-in;
+}
+
+.expandable-menu__link:hover,
+.expandable-menu__link:focus-visible,
+.expandable-menu__link--active {
+  width: var(--item-expanded-width);
+  outline: none;
+}
+
+.expandable-menu__link:hover::before,
+.expandable-menu__link:focus-visible::before,
+.expandable-menu__link--active::before {
+  transform: translateX(0);
+}
+
+.expandable-menu__link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+.expandable-menu__link--active {
+  color: var(--menu-active-text);
+}
+
+.expandable-menu__link--active::before {
+  background-color: var(--menu-active-background);
+}
+
+.expandable-menu__icon {
+  position: absolute;
+  left: var(--icon-left);
+
+  display: block;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+}
+
+.expandable-menu__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.expandable-menu__title {
+  display: block;
+  width: 100%;
+
+  text-align: center;
+  text-indent: var(--icon-size);
+
+  opacity: 0;
+  transform: translateX(100%);
+  transform-origin: center right;
+
+  transition:
+    transform var(--animation-speed) ease-in,
+    opacity var(--animation-speed) ease-in;
+}
+
+.expandable-menu__link:hover .expandable-menu__title,
+.expandable-menu__link:focus-visible .expandable-menu__title,
+.expandable-menu__link--active .expandable-menu__title {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Disabled state */
+
+.expandable-menu__link--disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Variants */
+
+.expandable-menu--light {
+  --menu-background: #ffffff;
+  --menu-text: #1f2937;
+  --menu-hover-background: #f3f4f6;
+  --menu-active-background: #e5e7eb;
+  --menu-active-text: #111827;
+  --menu-border: #f3f4f6;
+  --menu-shadow: 0 10px 25px rgba(0, 0, 0, 0.075);
+}
+
+.expandable-menu--dark {
+  --menu-background: #111827;
+  --menu-text: #d1d5db;
+  --menu-hover-background: #1f2937;
+  --menu-active-background: #374151;
+  --menu-active-text: #ffffff;
+  --menu-border: #374151;
+  --menu-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.expandable-menu--primary {
+  --menu-background: #2563eb;
+  --menu-text: #dbeafe;
+  --menu-hover-background: #1d4ed8;
+  --menu-active-background: #ffffff;
+  --menu-active-text: #1d4ed8;
+  --menu-border: #3b82f6;
+  --menu-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+.expandable-menu--minimal {
+  --menu-background: transparent;
+  --menu-text: #374151;
+  --menu-hover-background: #f3f4f6;
+  --menu-active-background: #e5e7eb;
+  --menu-active-text: #111827;
+  --menu-border: transparent;
+  --menu-shadow: none;
+}
+
+/* Sizes */
+
+.expandable-menu--small {
+  --menu-padding: 0.2rem;
+  --menu-radius: 8px;
+
+  --item-collapsed-width: 32px;
+  --item-expanded-width: 76px;
+  --item-height: 26px;
+  --item-radius: 5px;
+
+  --icon-size: 14px;
+  --icon-left: 9px;
+
+  font-size: 0.68rem;
+}
+
+.expandable-menu--medium {
+  --menu-padding: 0.25rem;
+  --menu-radius: 9px;
+
+  --item-collapsed-width: 38px;
+  --item-expanded-width: 86px;
+  --item-height: 30px;
+  --item-radius: 6px;
+
+  --icon-size: 16px;
+  --icon-left: 11px;
+
+  font-size: 0.75rem;
+}
+
+.expandable-menu--large {
+  --menu-padding: 0.3rem;
+  --menu-radius: 10px;
+
+  --item-collapsed-width: 44px;
+  --item-expanded-width: 98px;
+  --item-height: 36px;
+  --item-radius: 7px;
+
+  --icon-size: 18px;
+  --icon-left: 13px;
+
+  font-size: 0.82rem;
+}
+
+/* Vertical menus expand to the right in the same way. */
+
+.expandable-menu--vertical .expandable-menu__link {
+  transform-origin: center left;
+}
+
+/* Reduced-motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .expandable-menu__link,
+  .expandable-menu__link::before,
+  .expandable-menu__title {
+    transition: none;
+  }
+}
+
+/* Mobile fallback:
+   keep labels visible on narrow screens so the menu is easier to use. */
+
+@media (max-width: 520px) {
+  .expandable-menu--horizontal {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .expandable-menu--horizontal .expandable-menu__link {
+    width: var(--item-expanded-width);
+  }
+
+  .expandable-menu--horizontal .expandable-menu__link::before {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  .expandable-menu--horizontal
+    .expandable-menu__link:hover::before,
+  .expandable-menu--horizontal
+    .expandable-menu__link:focus-visible::before,
+  .expandable-menu--horizontal
+    .expandable-menu__link--active::before {
+    opacity: 1;
+  }
+
+  .expandable-menu--horizontal .expandable-menu__title {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

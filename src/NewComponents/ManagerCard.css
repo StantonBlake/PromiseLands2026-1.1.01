@@ -1,0 +1,2066 @@
+/*
+|--------------------------------------------------------------------------
+| Manager card shell
+|--------------------------------------------------------------------------
+*/
+
+.manager-card-shell {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  overflow: visible;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Manager card
+|--------------------------------------------------------------------------
+*/
+
+.manager-card {
+  --manager-card-background:
+    #0d141e;
+
+  --manager-card-background-hover:
+    #111b28;
+
+  --manager-card-border:
+    rgba(
+      148,
+      163,
+      184,
+      0.14
+    );
+
+  --manager-card-border-hover:
+    rgba(
+      148,
+      163,
+      184,
+      0.3
+    );
+
+  --manager-card-text:
+    #f8fafc;
+
+  --manager-card-muted:
+    #77869b;
+
+  --manager-card-soft:
+    #a9b5c6;
+
+  --manager-card-accent:
+    #60a5fa;
+
+  --manager-card-strength:
+    #64748b;
+
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(
+      0.28rem,
+      0.7vh,
+      0.44rem
+    );
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    var(
+      --manager-card-border
+    );
+
+  border-radius: 8px;
+
+  background:
+    radial-gradient(
+      circle at 52% -25%,
+      rgba(
+        96,
+        165,
+        250,
+        0.12
+      ),
+      transparent 56%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      ),
+      transparent 44%
+    ),
+    var(
+      --manager-card-background
+    );
+
+  color:
+    var(
+      --manager-card-text
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.03
+      ),
+    0 3px 10px
+      rgba(
+        0,
+        0,
+        0,
+        0.23
+      );
+
+  font: inherit;
+  text-align: left;
+
+  appearance: none;
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 100ms ease;
+}
+
+.manager-card:hover {
+  border-color:
+    var(
+      --manager-card-border-hover
+    );
+
+  background:
+    radial-gradient(
+      circle at 52% -25%,
+      rgba(
+        96,
+        165,
+        250,
+        0.16
+      ),
+      transparent 58%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.038
+      ),
+      transparent 44%
+    ),
+    var(
+      --manager-card-background-hover
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.04
+      ),
+    0 5px 14px
+      rgba(
+        0,
+        0,
+        0,
+        0.3
+      );
+}
+
+.manager-card:active {
+  transform:
+    translateY(1px);
+}
+
+.manager-card:focus-visible {
+  outline:
+    2px solid
+    var(
+      --manager-card-accent
+    );
+
+  outline-offset: 2px;
+}
+
+.manager-card--selected {
+  border-color:
+    rgba(
+      96,
+      165,
+      250,
+      0.78
+    );
+
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(
+        96,
+        165,
+        250,
+        0.15
+      ),
+    0 0 18px
+      rgba(
+        37,
+        99,
+        235,
+        0.14
+      );
+}
+
+.manager-card--warning {
+  border-color:
+    rgba(
+      245,
+      158,
+      11,
+      0.42
+    );
+}
+
+.manager-card--inactive {
+  opacity: 0.62;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Strength themes
+|--------------------------------------------------------------------------
+*/
+
+.manager-card--strength-elite {
+  --manager-card-strength:
+    #4ade80;
+}
+
+.manager-card--strength-strong {
+  --manager-card-strength:
+    #60a5fa;
+}
+
+.manager-card--strength-average {
+  --manager-card-strength:
+    #facc15;
+}
+
+.manager-card--strength-developing {
+  --manager-card-strength:
+    #fb923c;
+}
+
+.manager-card--strength-provisional {
+  --manager-card-strength:
+    #a78bfa;
+}
+
+.manager-card--strength-unranked {
+  --manager-card-strength:
+    #64748b;
+}
+
+.manager-card__strength-archetype {
+  display: grid;
+  gap: 0.08rem;
+
+  min-width: 0;
+}
+
+.manager-card__strength-archetype-label,
+.manager-card__strength-ranking-label,
+.manager-card__strength-trend-label {
+  color: rgba(
+    226,
+    232,
+    240,
+    0.5
+  );
+
+  font-size: 0.42rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manager-card__strength-archetype-value {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #e2e8f0;
+
+  font-weight: 800;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Card texture
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__texture {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(
+        255,
+        255,
+        255,
+        0.011
+      )
+        1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.011
+      )
+        1px,
+      transparent 1px
+    );
+
+  background-size:
+    8px 8px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      rgba(
+        0,
+        0,
+        0,
+        0.82
+      ),
+      transparent 92%
+    );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Main layout
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__main {
+  display: grid;
+
+  grid-template-columns:
+    clamp(
+      4.15rem,
+      28%,
+      5.35rem
+    )
+    minmax(
+      6.4rem,
+      1fr
+    )
+    clamp(
+      3.7rem,
+      24%,
+      4.75rem
+    );
+
+  align-items: stretch;
+
+  gap:
+    clamp(
+      0.1rem,
+      0.3vw,
+      0.22rem
+    );
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+}
+
+.manager-card__section-label,
+.manager-card__budget-label {
+  color:
+    var(
+      --manager-card-muted
+    );
+
+  font-size:
+    clamp(
+      0.42rem,
+      0.82vh,
+      0.56rem
+    );
+
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Roster column
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__roster {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(
+      0.16rem,
+      0.35vh,
+      0.25rem
+    )
+    clamp(
+      0.15rem,
+      0.3vw,
+      0.23rem
+    );
+
+  border:
+    1px solid
+    rgba(
+      148,
+      163,
+      184,
+      0.11
+    );
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.038
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.012
+      )
+    );
+}
+
+.manager-card__roster-list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  gap: 0.06rem;
+
+  min-width: 0;
+  min-height: 0;
+
+  margin-top: 0.12rem;
+}
+
+.manager-card__roster-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 0.18rem;
+
+  min-width: 0;
+
+  padding:
+    clamp(
+      0.2rem,
+      0.31vh,
+      0.22rem
+    )
+    clamp(
+      0.18rem,
+      0.37vw,
+      0.27rem
+    );
+
+  border-left:
+    3px solid
+    rgba(
+      100,
+      116,
+      139,
+      0.4
+    );
+
+  border-radius: 3px;
+
+  background:
+    rgba(
+      15,
+      23,
+      42,
+      0.54
+    );
+
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.manager-card__roster-slot--active {
+  border-left-color:
+    rgba(
+      96,
+      165,
+      250,
+      0.7
+    );
+}
+
+.manager-card__roster-slot--required {
+  border-left-color: #4ade80;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        34,
+        197,
+        94,
+        0.50
+      ),
+      rgba(
+        34,
+        197,
+        94,
+        0.035
+      )
+        42%,
+      rgba(
+        15,
+        23,
+        42,
+        0.54
+      )
+    );
+
+  box-shadow:
+    inset 4px 0 8px
+      rgba(
+        34,
+        197,
+        94,
+        0.1
+      );
+}
+
+.manager-card__roster-slot--optional {
+  border-left-color: #facc15;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        250,
+        204,
+        21,
+        0.50
+      ),
+      rgba(
+        250,
+        204,
+        21,
+        0.028
+      )
+        42%,
+      rgba(
+        15,
+        23,
+        42,
+        0.54
+      )
+    );
+
+  box-shadow:
+    inset 4px 0 8px
+      rgba(
+        250,
+        204,
+        21,
+        0.08
+      );
+}
+
+.manager-card__roster-slot--closed {
+  border-left-color: #f87171;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        248,
+        113,
+        113,
+        0.5
+      ),
+      rgba(
+        248,
+        113,
+        113,
+        0.04
+      )
+        42%,
+      rgba(
+        15,
+        23,
+        42,
+        0.5
+      )
+    );
+
+  box-shadow:
+    inset 4px 0 8px
+      rgba(
+        248,
+        113,
+        113,
+        0.11
+      );
+}
+
+.manager-card__roster-position {
+  min-width: 0;
+  overflow: hidden;
+
+  color: #b8c4d4;
+
+  font-size:
+    clamp(
+      0.65rem,
+      1.05vh,
+      0.75rem
+    );
+
+  font-weight: 650;
+  line-height: 1;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manager-card__roster-value {
+  flex: 0 0 auto;
+
+  color: #edf2f7;
+
+  font-size:
+    clamp(
+      0.55rem,
+      0.92vh,
+      0.63rem
+    );
+
+  font-weight: 700;
+  line-height: 1;
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Center column
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__center {
+  --identity-edge-offset:
+    clamp(
+      0.28rem,
+      0.7vh,
+      0.44rem
+    );
+
+  display: grid;
+
+  grid-template-rows:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  min-width: 0;
+  min-height: 0;
+
+  margin-bottom:
+    calc(
+      -1 *
+      var(
+        --identity-edge-offset
+      )
+    );
+}
+
+.manager-card__budget {
+  position: relative;
+
+  display: grid;
+
+  grid-template-rows:
+    auto
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items: center;
+
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(
+      0.08rem,
+      0.2vh,
+      0.15rem
+    )
+    clamp(
+      0.42rem,
+      0.8vw,
+      0.65rem
+    )
+    clamp(
+      0.2rem,
+      0.4vh,
+      0.3rem
+    );
+
+  overflow: visible;
+
+  text-align: center;
+}
+
+.manager-card__budget::before {
+  position: absolute;
+
+  top: 50%;
+  left: 2%;
+  right: 2%;
+  z-index: -1;
+
+  height: 72%;
+
+  content: "";
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      96,
+      165,
+      250,
+      0.16
+    );
+
+  filter:
+    blur(15px);
+
+  transform:
+    translateY(-50%);
+}
+
+.manager-card__budget-label {
+  justify-self: center;
+
+  font-size:
+    clamp(
+      0.45rem,
+      0.88vh,
+      0.6rem
+    );
+}
+
+.manager-card__budget-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  padding:
+    0
+    0.3rem;
+
+  overflow: visible;
+  box-sizing: border-box;
+
+  color: #f8fafc;
+
+  font-size:
+    clamp(
+      1.6rem,
+      3.35vh,
+      2.35rem
+    );
+
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.14
+      ),
+    0 0 18px
+      rgba(
+        96,
+        165,
+        250,
+        0.3
+      );
+}
+
+.manager-card__budget-details {
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    minmax(
+      0,
+      1fr
+    );
+
+  align-items: end;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top:
+    clamp(
+      0.1rem,
+      0.22vh,
+      0.16rem
+    );
+}
+
+.manager-card__budget-detail {
+  display: grid;
+
+  gap:
+    clamp(
+      0.08rem,
+      0.17vh,
+      0.12rem
+    );
+
+  min-width: 0;
+
+  text-align: left;
+}
+
+.manager-card__budget-detail--players {
+  text-align: right;
+}
+
+.manager-card__budget-detail-label {
+  color: #6f8096;
+
+  font-size:
+    clamp(
+      0.38rem,
+      0.72vh,
+      0.5rem
+    );
+
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.manager-card__budget-detail-value {
+  overflow: hidden;
+
+  color: #b8c5d6;
+
+  font-size:
+    clamp(
+      0.75rem,
+      0.98vh,
+      0.68rem
+    );
+
+  font-weight: 800;
+  line-height: 1;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manager-card--selected
+  .manager-card__budget-value {
+  color: #bfdbfe;
+
+  text-shadow:
+    0 0 11px
+      rgba(
+        96,
+        165,
+        250,
+        0.45
+      ),
+    0 0 24px
+      rgba(
+        37,
+        99,
+        235,
+        0.3
+      );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Manager identity strip
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__identity {
+  position: relative;
+  isolation: isolate;
+
+  display: grid;
+  align-items: center;
+
+  width:
+    calc(
+      100% +
+      clamp(
+        0.2rem,
+        0.6vw,
+        0.44rem
+      )
+    );
+
+  min-width: 0;
+
+  margin-left:
+    calc(
+      -0.5 *
+      clamp(
+        0.2rem,
+        0.6vw,
+        0.44rem
+      )
+    );
+
+  padding:
+    clamp(
+      0.34rem,
+      0.72vh,
+      0.5rem
+    )
+    clamp(
+      0.8rem,
+      1.5vw,
+      1.15rem
+    );
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  border-top:
+    1px solid
+    rgba(
+      96,
+      165,
+      250,
+      0.34
+    );
+
+  border-right:
+    1px solid
+    rgba(
+      96,
+      165,
+      250,
+      0.2
+    );
+
+  border-left:
+    1px solid
+    rgba(
+      96,
+      165,
+      250,
+      0.2
+    );
+
+  border-radius:
+    12px
+    12px
+    0
+    0;
+
+  clip-path:
+    polygon(
+      9% 0,
+      91% 0,
+      100% 100%,
+      0 100%
+    );
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(
+        30,
+        64,
+        175,
+        0.5
+      ),
+      rgba(
+        15,
+        23,
+        42,
+        0.99
+      )
+        48%,
+      rgba(
+        14,
+        116,
+        144,
+        0.32
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.1
+      ),
+    0 -2px 10px
+      rgba(
+        37,
+        99,
+        235,
+        0.1
+      );
+}
+
+.manager-card__identity-texture {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  pointer-events: none;
+
+  background-image:
+    repeating-linear-gradient(
+      118deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.045
+      )
+        0,
+      rgba(
+        255,
+        255,
+        255,
+        0.045
+      )
+        1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(
+        96,
+        165,
+        250,
+        0.2
+      ),
+      transparent 46%
+    );
+}
+
+.manager-card__name {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #f8fafc;
+
+  font-weight: 875;
+  line-height: 1;
+  letter-spacing: -0.025em;
+
+  text-align: center;
+  text-overflow: clip;
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 2px
+      rgba(
+        0,
+        0,
+        0,
+        0.52
+      );
+}
+
+/*
+|--------------------------------------------------------------------------
+| Strength / archetype / last-pick column
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__strength {
+  position: relative;
+
+  display: grid;
+
+  grid-template-rows:
+    minmax(0, 1.05fr)
+    minmax(0, 1.15fr)
+    minmax(0, 0.85fr);
+
+  align-items: stretch;
+
+  gap:
+    clamp(
+      0.08rem,
+      0.16vh,
+      0.13rem
+    );
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(
+      0.22rem,
+      0.46vh,
+      0.34rem
+    )
+    clamp(
+      0.2rem,
+      0.38vw,
+      0.34rem
+    );
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(
+        --manager-card-strength
+      )
+        34%,
+      transparent
+    );
+
+  border-radius: 6px;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(
+          --manager-card-strength
+        )
+          11%,
+        transparent
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.018
+      )
+    );
+
+  text-align: center;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Shared strength sections
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__strength-archetype,
+.manager-card__strength-ranking,
+.manager-card__pick-value {
+  display: grid;
+
+  align-content: center;
+  justify-items: center;
+
+  gap:
+    clamp(
+      0.05rem,
+      0.11vh,
+      0.08rem
+    );
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Shared labels
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__strength-archetype-label,
+.manager-card__strength-ranking-label,
+.manager-card__pick-value-label {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  color:
+    rgba(
+      226,
+      232,
+      240,
+      0.5
+    );
+
+  font-size:
+    clamp(
+      0.36rem,
+      0.67vh,
+      0.46rem
+    );
+
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0.07em;
+
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Archetype
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__strength-archetype {
+  padding:
+    0
+    0
+    clamp(
+      0.06rem,
+      0.12vh,
+      0.1rem
+    );
+
+  border-bottom:
+    1px solid
+    rgba(
+      148,
+      163,
+      184,
+      0.09
+    );
+}
+
+.manager-card__strength-archetype-value {
+  display: -webkit-box;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  color: #e2e8f0;
+
+  font-size:
+    clamp(
+      0.54rem,
+      0.98vh,
+      0.68rem
+    ) !important;
+
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+  word-break: normal;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Strength ranking
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__strength-ranking {
+  padding:
+    clamp(
+      0.02rem,
+      0.06vh,
+      0.05rem
+    )
+    0;
+}
+
+.manager-card__strength-rank {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color:
+    color-mix(
+      in srgb,
+      var(
+        --manager-card-strength
+      )
+        38%,
+      white
+    );
+
+  font-size:
+    clamp(
+      1.15rem,
+      2.45vh,
+      1.65rem
+    );
+
+  font-weight: 950;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.1
+      ),
+    0 0 11px
+      color-mix(
+        in srgb,
+        var(
+          --manager-card-strength
+        )
+          20%,
+        transparent
+      );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Last-pick value
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__pick-value {
+  display: grid;
+
+  grid-template-rows:
+    auto
+    auto;
+
+  align-content: center;
+  justify-items: center;
+
+  width: 100%;
+
+  padding:
+    clamp(
+      0.06rem,
+      0.12vh,
+      0.1rem
+    )
+    0
+    0;
+
+  border-top:
+    1px solid
+    rgba(
+      148,
+      163,
+      184,
+      0.09
+    );
+}
+
+.manager-card__pick-value-label {
+  justify-self: center;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.manager-card__pick-value-amount {
+  display: block;
+
+  justify-self: center;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  font-size:
+    clamp(
+      0.56rem,
+      1.02vh,
+      0.72rem
+    );
+
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.01em;
+
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Last-pick value states
+|--------------------------------------------------------------------------
+*/
+
+.manager-card__pick-value--positive
+  .manager-card__pick-value-amount {
+  color: #4ade80;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        74,
+        222,
+        128,
+        0.2
+      );
+}
+
+.manager-card__pick-value--negative
+  .manager-card__pick-value-amount {
+  color: #fb7185;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        251,
+        113,
+        133,
+        0.18
+      );
+}
+
+.manager-card__pick-value--even
+  .manager-card__pick-value-amount {
+  color: #facc15;
+}
+
+.manager-card__pick-value--empty
+  .manager-card__pick-value-amount {
+  color: #64748b;
+
+  font-size:
+    clamp(
+      0.4rem,
+      0.72vh,
+      0.5rem
+    );
+
+  font-weight: 750;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Narrow card handling
+|--------------------------------------------------------------------------
+*/
+
+@media (
+  max-width: 1100px
+) {
+  .manager-card__strength {
+    grid-template-rows:
+      minmax(0, 1.08fr)
+      minmax(0, 1.08fr)
+      minmax(0, 0.84fr);
+
+    padding:
+      0.2rem
+      0.18rem;
+  }
+
+  .manager-card__strength-archetype-value {
+    font-size:
+      clamp(
+        0.5rem,
+        0.9vh,
+        0.62rem
+      ) !important;
+  }
+
+  .manager-card__strength-rank {
+    font-size:
+      clamp(
+        1.05rem,
+        2.25vh,
+        1.48rem
+      );
+  }
+
+  .manager-card__pick-value-amount {
+    font-size:
+      clamp(
+        0.52rem,
+        0.92vh,
+        0.66rem
+      );
+  }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Manager card tooltip
+|--------------------------------------------------------------------------
+*/
+
+.manager-card-tooltip {
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+
+  display: block;
+
+ 
+  /*
+   * The tooltip may grow wider than one card, but it is capped by:
+   * - the combined width of roughly two manager cards,
+   * - the preferred desktop tooltip width,
+   * - and the visible viewport.
+   */
+  width:
+    min(
+      20rem,
+      calc(200% + 0.5rem),
+      calc(100vw - 1rem)
+    );
+
+  max-height:
+    min(
+      22rem,
+      calc(50vh - 1rem)
+    );
+
+  padding: 0.65rem;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    rgba(
+      148,
+      163,
+      184,
+      0.24
+    );
+
+  border-radius: 8px;
+
+  background: #111827;
+  color: #f8fafc;
+
+  box-shadow:
+    0 14px 32px
+      rgba(
+        0,
+        0,
+        0,
+        0.48
+      ),
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.05
+      );
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform:
+    translateY(4px);
+
+  transform-origin:
+    top left;
+
+  transition:
+    opacity 140ms ease,
+    visibility 140ms ease,
+    transform 140ms ease;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(
+      96,
+      165,
+      250,
+      0.3
+    )
+    transparent;
+}
+
+.manager-card-tooltip::-webkit-scrollbar {
+  width: 4px;
+}
+
+.manager-card-tooltip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.manager-card-tooltip::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(
+      96,
+      165,
+      250,
+      0.3
+    );
+}
+
+/*
+ * Raise the complete shell above adjacent cards.
+ */
+.manager-card-shell--tooltip-open {
+  z-index: 100;
+}
+
+/*
+ * Reveal the tooltip when React adds
+ * the open class to the shell.
+ */
+.manager-card-shell--tooltip-open
+  > .manager-card-tooltip {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform:
+    translateY(0)
+    scale(.95);
+}
+
+/*
+ * Placement above the card.
+ */
+.manager-card-shell--tooltip-above
+  > .manager-card-tooltip {
+    bottom: calc(2% + 0.2rem);
+    transform:
+    translateY(-8%)
+    scale(.95);
+}
+
+/*
+ * Placement below the card.
+ */
+.manager-card-shell--tooltip-below
+  > .manager-card-tooltip {
+    top: calc(100% + 0.2rem);
+}
+
+
+
+
+/*
+ * The manager grid displays two cards per row.
+ * Odd cards anchor the tooltip to the left edge.
+ * Even cards anchor it to the right edge.
+ * This makes each tooltip expand toward the center of the grid.
+ */
+.manager-grid
+  > .manager-card-shell:nth-child(even)
+  > .manager-card-tooltip {
+  right: 0;
+  left: auto;
+
+  transform-origin:
+    top right;
+}
+
+/*
+ * A single-column manager grid no longer needs alternating alignment.
+ */
+@media (
+  max-width: 700px
+) {
+  .manager-grid
+    > .manager-card-shell:nth-child(even)
+    > .manager-card-tooltip {
+    right: auto;
+    left: 0;
+
+    transform-origin:
+      top left;
+  }
+
+  .manager-card-tooltip {
+    width:
+      min(
+        120%,
+        calc(125vw - 1rem)
+      );
+
+    max-height:
+      min(
+        10rem,
+        calc(50vh - .1rem)
+      );
+  }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Tooltip content
+|--------------------------------------------------------------------------
+*/
+
+.manager-card-tooltip__header {
+  display: grid;
+  justify-items: center;
+
+  gap: 0.15rem;
+
+  margin-bottom: 0.45rem;
+}
+
+.manager-card-tooltip__eyebrow,
+.manager-card-tooltip__total-label,
+.manager-card-tooltip__summary-label {
+  color: #94a3b8;
+
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.manager-card-tooltip__total {
+  color: #f8fafc;
+
+  font-size: 1.65rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.manager-card-tooltip__summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 0.3rem;
+}
+
+.manager-card-tooltip__summary-item {
+  display: grid;
+
+  gap: 0.25rem;
+
+  min-width: 0;
+
+  padding: 0.34rem;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.12);
+
+  border-radius: 5px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  text-align: center;
+}
+
+.manager-card-tooltip__summary-value {
+  overflow: hidden;
+
+  color: #e2e8f0;
+
+  font-size: 0.78rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manager-card-tooltip__divider {
+  display: block;
+
+  height: 1px;
+
+  margin: 0.45rem 0;
+
+  background:
+    rgba(148, 163, 184, 0.14);
+}
+
+.manager-card-tooltip__table-header,
+.manager-card-tooltip__position-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    4rem
+    2.5rem;
+
+  align-items: center;
+
+  gap: 0.45rem;
+}
+
+.manager-card-tooltip__table-header {
+  padding: 0 0.4rem 0.3rem;
+
+  color: #64748b;
+
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.manager-card-tooltip__table-header
+  > span:not(:first-child) {
+  text-align: right;
+}
+
+.manager-card-tooltip__positions {
+  display: grid;
+
+  gap: 0.12rem;
+}
+
+.manager-card-tooltip__position-row {
+  padding: 0.28rem 0.34rem;
+
+  border-radius: 4px;
+
+  background:
+    rgba(15, 23, 42, 0.72);
+}
+
+.manager-card-tooltip__position-name {
+  display: flex;
+  align-items: center;
+
+  gap: 0.35rem;
+}
+
+.manager-card-tooltip__position-name
+  small {
+  color: #64748b;
+}
+
+.manager-card-tooltip__position-points,
+.manager-card-tooltip__position-rank {
+  text-align: right;
+}
+
+.manager-card-tooltip__position-rank {
+  color: #93c5fd;
+
+  font-weight: 800;
+}
+
+.manager-card-tooltip__footer {
+  display: block;
+
+  margin-top: 0.45rem;
+
+  color: #64748b;
+
+  font-size: 0.58rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Locked and motion states
+|--------------------------------------------------------------------------
+*/
+
+.manager-card--locked {
+  cursor: default;
+}
+
+.manager-card--locked::after {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  content: "";
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(
+        15,
+        23,
+        42,
+        0.12
+      )
+    );
+}
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .manager-card,
+  .manager-card__roster-slot,
+  .manager-card-tooltip {
+    transition: none;
+  }
+}
